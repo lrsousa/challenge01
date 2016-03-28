@@ -3,6 +3,7 @@ package com.leitor;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -19,7 +20,9 @@ public class LeitorArquivo {
 	public static void main(String[] args) throws IOException {
 		
 		for (Path path : listaArquivosDat(in)) {
-			System.out.println(path.getFileName());
+			List<String> linhas = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
+			System.out.println("Quantidade de lihas: " + linhas.size());
+			linhas.forEach(linha -> System.out.println(linha));
 		}
 		
 		
