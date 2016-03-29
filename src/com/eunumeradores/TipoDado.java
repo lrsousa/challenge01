@@ -1,6 +1,6 @@
 package com.eunumeradores;
 
-import com.leitor.Agregador;
+import com.logic.Agregador;
 import com.modelos.Customer;
 import com.modelos.Sale;
 import com.modelos.Salesman;

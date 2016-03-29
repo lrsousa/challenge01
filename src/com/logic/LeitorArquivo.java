@@ -1,8 +1,7 @@
-package com.leitor;
+package com.logic;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.DirectoryIteratorException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -32,20 +31,19 @@ public class LeitorArquivo {
 	private LeitorArquivo() throws Exception {
 		for (Path path : listaArquivosDat(in)) {
 			
-			if (path.toFile().length() > 0) {
+//			if (path.toFile().length() > 0) {
 			
 				agregador = new Agregador();
 				
-	//			System.out.println(path.getFileName());
 				Files.readAllLines(path, StandardCharsets.ISO_8859_1).forEach(linha -> {
 					TipoDado.mountType(linha, agregador);
 				});
-				
 				DataAnalyzer dataAnalynzer = new DataAnalyzer(agregador);
+				System.out.println(dataAnalynzer.toString());
 				// GeraOutput
-				agregador.toString();
-		
-			}
+//				agregador.toString();
+				
+//			}
 		}
 	}
 	
@@ -57,7 +55,6 @@ public class LeitorArquivo {
 				resultado.add(path);
 			}
 		} 
-		
 		return resultado.stream().filter(path -> arquivoEstaValido(path)).collect(Collectors.toList());
 	}
 

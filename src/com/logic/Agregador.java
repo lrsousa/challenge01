@@ -1,4 +1,4 @@
-package com.leitor;
+package com.logic;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -1,6 +1,5 @@
-package com.leitor;
+package com.logic;
 
-import com.eunumeradores.TipoDado;
 import com.modelos.Sale;
 import com.modelos.Salesman;
 
@@ -68,8 +67,11 @@ public class DataAnalyzer {
 
 	@Override
 	public String toString() {
-		return "DataAnalyzer [amountCustomers=" + amountCustomers + ", amountSalesman=" + amountSalesman
-				+ ", idMostExpensiveSale=" + idMostExpensiveSale + ", worstSalesman=" + worstSalesman + "]";
+		return "DataAnalyzer [amountCustomers=" + amountCustomers +
+				", amountSalesman=" + amountSalesman +
+				", idMostExpensiveSale=" + idMostExpensiveSale +
+				", worstSalesman=" + worstSalesman.getName() +
+				"]";
 	}
 	
 	
