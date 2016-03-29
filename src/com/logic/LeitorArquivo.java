@@ -30,20 +30,13 @@ public class LeitorArquivo {
 	
 	private LeitorArquivo() throws Exception {
 		for (Path path : listaArquivosDat(in)) {
-			
-//			if (path.toFile().length() > 0) {
-			
-				agregador = new Agregador();
-				
-				Files.readAllLines(path, StandardCharsets.ISO_8859_1).forEach(linha -> {
-					TipoDado.mountType(linha, agregador);
-				});
-				DataAnalyzer dataAnalynzer = new DataAnalyzer(agregador);
-				System.out.println(dataAnalynzer.toString());
-				// GeraOutput
-//				agregador.toString();
-				
-//			}
+			agregador = new Agregador();
+			Files.readAllLines(path, StandardCharsets.ISO_8859_1).forEach(linha -> {
+				TipoDado.mountType(linha, agregador);
+			});
+			DataAnalyzer dataAnalynzer = new DataAnalyzer(agregador);
+			DatFileWriter datFileWriter = new DatFileWriter();
+			datFileWriter.createDoneDatFile(out, path.getFileName(), dataAnalynzer.toString());
 		}
 	}
 	
