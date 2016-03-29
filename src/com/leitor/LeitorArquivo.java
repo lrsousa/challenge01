@@ -23,14 +23,14 @@ public class LeitorArquivo {
 	
 	public static void main(String[] args) throws IOException {
 		for (Path path : listaArquivosDat(in)) {
-			System.out.println(path.getFileName());
+//			System.out.println(path.getFileName());
 			Files.readAllLines(path, StandardCharsets.ISO_8859_1).forEach(linha -> {
 				TipoDado.mountType(linha, agregador);
 			});
-			
 			// Analise
 			// GeraOutput
 		}
+		agregador.toString();
 	}
 	
 	static List<Path> listaArquivosDat(Path diretorio) {

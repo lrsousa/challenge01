@@ -1,7 +1,9 @@
 package com.leitor;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.modelos.Customer;
 import com.modelos.Item;
@@ -9,36 +11,39 @@ import com.modelos.Sale;
 import com.modelos.Salesman;
 
 public class Agregador {
-	private List<Salesman> salesmans;
-	private List<Customer> customers;
+	private Set<Salesman> salesmans;
+	private Set<Customer> customers;
 	private List<Sale> sales;
 	
 	public Agregador() {
-		this.salesmans = new ArrayList<Salesman>();
-		this.customers = new ArrayList<Customer>();
+		this.salesmans = new HashSet<Salesman>();
+		this.customers = new HashSet<Customer>();
 		this.sales = new ArrayList<Sale>();
 	}
 	
-	private List<Salesman> getSalesmans() {
+	private Set<Salesman> getSalesmans() {
 		return salesmans;
 	}
-	private List<Customer> getCustomers() {
+	private Set<Customer> getCustomers() {
 		return customers;
 	}
 	private List<Sale> getSales() {
 		return sales;
 	}
 
-	@Override
-	public String toString() {
-		System.out.println("Salesmans size: " + getSalesmans().size());
-		System.out.println("Customers size: " + getCustomers().size());
-		System.out.println("Sales size: " + getSales().size());
-		return "";
-	}
+//	private boolean existSalesman(Salesman salesman) {
+//		for (Salesman sm : getSalesmans()) {
+//			if(sm.equals(salesman)) {
+//				return true;
+//			}
+//		}
+//		return false;
+//	}
 	
 	public void addSalesman(Salesman salesman) {
-		getSalesmans().add(salesman);
+//		if(!existSalesman(salesman)) {
+			getSalesmans().add(salesman);
+//		}
 	}
 	public void addCustomer(Customer customer) {
 		getCustomers().add(customer);
@@ -61,6 +66,23 @@ public class Agregador {
 		return null;
 	}
 	
-	
+	@Override
+	public String toString() {
+		for (Salesman salesman: getSalesmans()) {
+			System.out.println("Salesman name: " + salesman.getName());
+		}
+		System.out.println("Salesmans size: " + getSalesmans().size());
+		System.out.println("===============");
+		for (Customer customer : getCustomers()) {
+			System.out.println("Customer name: " + customer.getName());
+		}
+		System.out.println("Customers size: " + getCustomers().size());
+		System.out.println("===============");
+		for (Sale sale : getSales()) {
+			System.out.println("Total venda: " + sale.getTotalValue());
+		}
+		System.out.println("Sales size: " + getSales().size());
+		return "";
+	}
 	
 }

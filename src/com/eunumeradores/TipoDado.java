@@ -22,7 +22,7 @@ public enum TipoDado {
 		@Override
 		public Customer mountTypeInput(String cnpj, String name, String businesArea,  Agregador agregador) {
 //			System.out.println("CUSTOMER");
-			Customer customer =  new Customer(new Cnpj(cnpj), name, BusinessArea.valueOf(businesArea.toUpperCase()));
+			Customer customer =  new Customer(new Cnpj(cnpj), name, businesArea);
 			agregador.addCustomer(customer);
 			return customer;
 		}
