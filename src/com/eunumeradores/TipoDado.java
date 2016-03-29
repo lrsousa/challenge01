@@ -11,8 +11,7 @@ import com.tinyclasses.Salary;
 public enum TipoDado {
 	N001 ("001") {
 		@Override
-		public Salesman mountTypeInput(String cpf, String nome, String salary, Agregador agregador) {
-//			System.out.println("SALESMAN");
+		Salesman mountTypeInput(String cpf, String nome, String salary, Agregador agregador) {
 			Salesman salesman = new Salesman(new Cpf(cpf), nome, new Salary(Double.parseDouble(salary)));
 			agregador.addSalesman(salesman);
 			return salesman;
@@ -20,8 +19,7 @@ public enum TipoDado {
 	},
 	N002 ("002") {
 		@Override
-		public Customer mountTypeInput(String cnpj, String name, String businesArea,  Agregador agregador) {
-//			System.out.println("CUSTOMER");
+		Customer mountTypeInput(String cnpj, String name, String businesArea,  Agregador agregador) {
 			Customer customer =  new Customer(new Cnpj(cnpj), name, businesArea);
 			agregador.addCustomer(customer);
 			return customer;
@@ -30,15 +28,16 @@ public enum TipoDado {
 	},
 	N003 ("003") {
 		@Override
-		public Sale mountTypeInput(String id, String listaItens, String vendedor, Agregador agregador) {
-//			System.out.println("SALES");
-			Sale sale = new Sale(Integer.parseInt(id), agregador.getSalesmanByName(vendedor));
-			
+		Sale mountTypeInput(String id, String listaItens, String vendedor, Agregador agregador) {
+			Salesman salesmanObject = agregador.getSalesmanByName(vendedor);
+			Sale sale = new Sale(Integer.parseInt(id), salesmanObject);
+
 			String[] itensDaVenda = listaItens.substring(1, listaItens.length() - 1).split(",");
 			for (String string : itensDaVenda) {
 				sale.addItem(agregador.mountItem(string));
 			}
 			agregador.addSale(sale);
+			salesmanObject.salesIncrement(sale);
 			return sale;
 		}
 	};

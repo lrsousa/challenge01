@@ -7,11 +7,13 @@ public class Salesman {
 	private Cpf cpf;
 	private String name;
 	private Salary salary;
+	private double totalValueSales;
 	
 	public Salesman(Cpf cpf, String name, Salary salary) {
 		this.cpf = cpf;
 		this.name = name;
 		this.salary = salary;
+		totalValueSales = 0;
 	}
 
 	public Cpf getCpf() {
@@ -22,6 +24,17 @@ public class Salesman {
 	}
 	public Salary getSalary() {
 		return salary;
+	}
+	public double getTotalValueSales() {
+		return totalValueSales;
+	}
+	
+	public boolean salesIncrement(Sale sale) {
+		if(sale.getTotalValue() > 0) {
+			totalValueSales += sale.getTotalValue();
+			return true;
+		}
+		return false;
 	}
 
 	@Override

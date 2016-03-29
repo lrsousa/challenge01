@@ -21,29 +21,18 @@ public class Agregador {
 		this.sales = new ArrayList<Sale>();
 	}
 	
-	private Set<Salesman> getSalesmans() {
+	Set<Salesman> getSalesmans() {
 		return salesmans;
 	}
-	private Set<Customer> getCustomers() {
+	Set<Customer> getCustomers() {
 		return customers;
 	}
-	private List<Sale> getSales() {
+	List<Sale> getSales() {
 		return sales;
 	}
 
-//	private boolean existSalesman(Salesman salesman) {
-//		for (Salesman sm : getSalesmans()) {
-//			if(sm.equals(salesman)) {
-//				return true;
-//			}
-//		}
-//		return false;
-//	}
-	
 	public void addSalesman(Salesman salesman) {
-//		if(!existSalesman(salesman)) {
-			getSalesmans().add(salesman);
-//		}
+		getSalesmans().add(salesman);
 	}
 	public void addCustomer(Customer customer) {
 		getCustomers().add(customer);
@@ -69,7 +58,7 @@ public class Agregador {
 	@Override
 	public String toString() {
 		for (Salesman salesman: getSalesmans()) {
-			System.out.println("Salesman name: " + salesman.getName());
+			System.out.println("Salesman name: " + salesman.getName() + " - " + "Valor total de vendas: " + salesman.getTotalValueSales());
 		}
 		System.out.println("Salesmans size: " + getSalesmans().size());
 		System.out.println("===============");
