@@ -12,6 +12,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.eunumeradores.TipoDado;
+
 public class LeitorArquivo {
 	static final String userhome = System.getProperty("user.home");
 	static final Path in = Paths.get(userhome + "/data/in");
@@ -22,7 +24,18 @@ public class LeitorArquivo {
 		for (Path path : listaArquivosDat(in)) {
 			List<String> linhas = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
 			System.out.println("Quantidade de lihas: " + linhas.size());
-			linhas.forEach(linha -> System.out.println(linha));
+			linhas.forEach(linha -> {
+				String[] dados = linha.split("ç");
+				
+				TipoDado.valueOf("N" + dados[0]).retornaTipo(dados[1], dados[2], dados[3]);
+				
+				
+				
+				
+//				for (String string : dados) {
+//					System.out.println(string);
+//				}
+			});
 		}
 		
 		
