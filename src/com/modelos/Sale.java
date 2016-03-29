@@ -1,5 +1,6 @@
 package com.modelos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Sale {
@@ -7,18 +8,29 @@ public class Sale {
 	private List<Item> itens;
 	private Salesman salesman;
 	
-	public Sale(int id, List<Item> itens, Salesman salesman) {
+	private double totalValue;
+	
+	public Sale(int id, Salesman salesman) {
 		this.id = id;
-		this.itens = itens;
 		this.salesman = salesman;
+		itens = new ArrayList<>();
 	}
 
 	public int getId() {
 		return id;
 	}
-	public List<Item> getItens() {
-		return itens;
+	
+	public double getTotalValue() {
+		return totalValue;
 	}
+	
+	public void addItem(Item item) {
+		if (item != null) {
+			totalValue += (item.getPrice() * item.getQuantity());
+			itens.add(item);
+		}
+	}
+	
 	public Salesman getSalesman() {
 		return salesman;
 	}

@@ -1,11 +1,7 @@
 package com.eunumeradores;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.leitor.Agregador;
 import com.modelos.Customer;
-import com.modelos.Item;
 import com.modelos.Sale;
 import com.modelos.Salesman;
 import com.tinyclasses.Cnpj;
@@ -16,34 +12,34 @@ public enum TipoDado {
 	N001 ("001") {
 		@Override
 		public Salesman mountTypeInput(String cpf, String nome, String salary, Agregador agregador) {
-			System.out.println("SALESMAN");
-			Salesman vendedor = new Salesman(new Cpf(cpf), nome, new Salary(Double.parseDouble(salary)));
-			agregador.getSalesmans().add(vendedor);
-			return vendedor;
+//			System.out.println("SALESMAN");
+			Salesman salesman = new Salesman(new Cpf(cpf), nome, new Salary(Double.parseDouble(salary)));
+			agregador.addSalesman(salesman);
+			return salesman;
 		}
 	},
 	N002 ("002") {
 		@Override
 		public Customer mountTypeInput(String cnpj, String name, String businesArea,  Agregador agregador) {
-			System.out.println("CUSTOMER");
-			Customer cliente =  new Customer(new Cnpj(cnpj), name, BusinessArea.valueOf(businesArea.toUpperCase()));
-			agregador.getCustomers().add(cliente);
-			return cliente;
+//			System.out.println("CUSTOMER");
+			Customer customer =  new Customer(new Cnpj(cnpj), name, BusinessArea.valueOf(businesArea.toUpperCase()));
+			agregador.addCustomer(customer);
+			return customer;
 		}
 		
 	},
 	N003 ("003") {
 		@Override
 		public Sale mountTypeInput(String id, String listaItens, String vendedor, Agregador agregador) {
-			System.out.println("SALES");
-			List<Item> itens = new ArrayList<Item>();
+//			System.out.println("SALES");
+			Sale sale = new Sale(Integer.parseInt(id), agregador.getSalesmanByName(vendedor));
+			
 			String[] itensDaVenda = listaItens.substring(1, listaItens.length() - 1).split(",");
 			for (String string : itensDaVenda) {
-				itens.add(agregador.mountItem(string));
+				sale.addItem(agregador.mountItem(string));
 			}
-			Sale venda = new Sale(Integer.parseInt(id), itens, agregador.getSalesmanByName(vendedor));
-			agregador.getSales().add(venda);
-			return venda;
+			agregador.addSale(sale);
+			return sale;
 		}
 	};
 	
@@ -65,5 +61,14 @@ public enum TipoDado {
 		return null;
 	}
 	
-	public abstract Object mountTypeInput(String n, String f, String g, Agregador a);
+	abstract Object mountTypeInput(String n, String f, String g, Agregador a);
+	
+	public static void mountType(String linha, Agregador agregador) {
+		String[] dados = linha.split("ç");
+		TipoDado tipo = TipoDado.valueOf("N" + dados[0]);
+		if (tipo != null) {
+			tipo.mountTypeInput(dados[1], dados[2], dados[3], agregador);
+		}
+	}
+	
 }

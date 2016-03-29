@@ -19,14 +19,32 @@ public class Agregador {
 		this.sales = new ArrayList<Sale>();
 	}
 	
-	public List<Salesman> getSalesmans() {
+	private List<Salesman> getSalesmans() {
 		return salesmans;
 	}
-	public List<Customer> getCustomers() {
+	private List<Customer> getCustomers() {
 		return customers;
 	}
-	public List<Sale> getSales() {
+	private List<Sale> getSales() {
 		return sales;
+	}
+
+	@Override
+	public String toString() {
+		System.out.println("Salesmans size: " + getSalesmans().size());
+		System.out.println("Customers size: " + getCustomers().size());
+		System.out.println("Sales size: " + getSales().size());
+		return "";
+	}
+	
+	public void addSalesman(Salesman salesman) {
+		getSalesmans().add(salesman);
+	}
+	public void addCustomer(Customer customer) {
+		getCustomers().add(customer);
+	}
+	public void addSale(Sale sale) {
+		getSales().add(sale);
 	}
 	
 	public Item mountItem(String item) {
@@ -42,4 +60,7 @@ public class Agregador {
 		}
 		return null;
 	}
+	
+	
+	
 }
