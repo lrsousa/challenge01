@@ -2,12 +2,12 @@ package com.modelos;
 
 import java.util.List;
 
-public class Sales {
+public class Sale {
 	private int id;
 	private List<Item> itens;
 	private Salesman salesman;
 	
-	public Sales(int id, List<Item> itens, Salesman salesman) {
+	public Sale(int id, List<Item> itens, Salesman salesman) {
 		this.id = id;
 		this.itens = itens;
 		this.salesman = salesman;

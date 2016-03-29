@@ -16,35 +16,25 @@ import com.eunumeradores.TipoDado;
 
 public class LeitorArquivo {
 	static final String userhome = System.getProperty("user.home");
-	static final Path in = Paths.get(userhome + "/data/in");
-	static final Path out = Paths.get(userhome + "/data/ou");
+	static final String caminhoRepo = userhome + File.separator + "Desktop" + File.separator + "data" + File.separator;
+	static final Path in = Paths.get(caminhoRepo + "in");
+	static final Path out = Paths.get(caminhoRepo + "out");
+	
+	static Agregador agregador = new Agregador();
 	
 	public static void main(String[] args) throws IOException {
 		
 		for (Path path : listaArquivosDat(in)) {
 			List<String> linhas = Files.readAllLines(path, StandardCharsets.ISO_8859_1);
-			System.out.println("Quantidade de lihas: " + linhas.size());
 			linhas.forEach(linha -> {
 				String[] dados = linha.split("ç");
-				
-				TipoDado.valueOf("N" + dados[0]).retornaTipo(dados[1], dados[2], dados[3]);
-				
-				
-				
-				
-//				for (String string : dados) {
-//					System.out.println(string);
-//				}
+				TipoDado.valueOf("N" + dados[0]).mountTypeInput(dados[1], dados[2], dados[3], agregador);
 			});
 		}
 		
-		
-//		File dir = new File(in);
-//		File[] files = dir.listFiles(filter);
-//		
-//		for (File file : files) {
-//			
-//		}
+		System.out.println(agregador.getSales().size());
+		System.out.println(agregador.getCustomers().size());
+		System.out.println(agregador.getSalesmans().size());
 		
 	}
 	
@@ -61,12 +51,4 @@ public class LeitorArquivo {
 		}
 		return resultado;
 	}
-	
-	static FileFilter filter = new FileFilter() {
-		@Override
-		public boolean accept(File pathname) {
-			int tamFileName = pathname.getName().length();
-			return pathname.getName().substring(tamFileName - 4, tamFileName).equals(".dat") ? true : false;
-		}
-	};
 }
